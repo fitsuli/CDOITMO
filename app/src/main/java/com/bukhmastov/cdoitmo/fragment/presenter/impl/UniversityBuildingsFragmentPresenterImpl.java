@@ -15,8 +15,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.bukhmastov.cdoitmo.App;
 import com.bukhmastov.cdoitmo.R;
@@ -53,6 +60,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -60,14 +68,6 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.inject.Inject;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 import static com.bukhmastov.cdoitmo.util.Thread.UB;
 
@@ -165,7 +165,7 @@ public class UniversityBuildingsFragmentPresenterImpl implements UniversityBuild
                 log.w(TAG, "onCreateView | fragment not added to activity");
                 return;
             }
-            Switch dormitorySwitch = container.findViewById(R.id.dormitory_switch);
+            SwitchMaterial dormitorySwitch = container.findViewById(R.id.dormitory_switch);
             if (dormitorySwitch != null) {
                 dormitorySwitch.setChecked(markersDormitoryEnabled);
                 dormitorySwitch.setOnCheckedChangeListener((buttonView, isChecked) -> thread.run(UB, () -> {
@@ -174,7 +174,7 @@ public class UniversityBuildingsFragmentPresenterImpl implements UniversityBuild
                     displayMarkers();
                 }));
             }
-            Switch campusSwitch = container.findViewById(R.id.campus_switch);
+            SwitchMaterial campusSwitch = container.findViewById(R.id.campus_switch);
             if (campusSwitch != null) {
                 campusSwitch.setChecked(markersCampusEnabled);
                 campusSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> thread.run(UB, () -> {

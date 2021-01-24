@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme.Black" parent="Theme.AppCompat.NoActionBar">
+    <style name="AppTheme.Black" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
         <item name="colorPrimaryLight">@color/colorPrimaryBlack</item>
         <item name="colorPrimary">@color/colorPrimaryBlack</item>
@@ -64,7 +64,8 @@
         <item name="android:dropDownItemStyle">@style/AppTheme.Alert.Black</item>
 
     </style>
-    <style name="AppTheme.Toolbar.Black" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    <style name="AppTheme.Toolbar.Black" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
         <item name="android:textColorPrimary">@color/colorToolbarContentBlack</item>
         <item name="android:textColorPrimaryInverse">@color/colorToolbarContentBlack</item>
         <item name="android:textColorSecondary">@color/colorToolbarContentBlack</item>
@@ -97,7 +98,8 @@
     <style name="AppTheme.Black.TransparentStatusBar" parent="AppTheme.Black">
         <item name="android:windowTranslucentStatus">true</item>
     </style>
-    <style name="AppTheme.Alert.Black" parent="Theme.AppCompat.Dialog.Alert">
+
+    <style name="AppTheme.Alert.Black" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
         <item name="android:textColor">@color/textColorPrimaryBlack</item>
         <item name="android:textColorPrimary">@color/textColorPrimaryBlack</item>
         <item name="android:textColorSecondary">@color/textColorSecondaryBlack</item>

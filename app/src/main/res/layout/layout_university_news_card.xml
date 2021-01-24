@@ -11,7 +11,7 @@
     android:paddingTop="@dimen/item_padding_quarter"
     android:paddingBottom="0dp" >
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="?attr/colorBackgroundCards"
@@ -39,7 +39,7 @@
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
                     android:src="@drawable/background_pattern"
-                    android:tint="?attr/colorImageMultiply"
+                    app:tint="?attr/colorImageMultiply"
                     android:tintMode="multiply" />
 
             </FrameLayout>
@@ -125,7 +125,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginEnd="@dimen/item_padding_quarter"
                             android:layout_marginStart="@dimen/item_padding_quarter"
-                            android:tint="?android:attr/textColorSecondary"
+                            app:tint="?android:attr/textColorSecondary"
                             android:src="@drawable/ic_visibility" />
 
                         <TextView
@@ -145,6 +145,6 @@
 
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 </FrameLayout>

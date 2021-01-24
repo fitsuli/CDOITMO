@@ -23,14 +23,18 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
-import android.widget.Switch;
 import android.widget.TextView;
+
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 import com.bukhmastov.cdoitmo.R;
 import com.bukhmastov.cdoitmo.activity.ScheduleLessonsWidgetConfigureActivity;
 import com.bukhmastov.cdoitmo.activity.presenter.ScheduleLessonsWidgetConfigureActivityPresenter;
 import com.bukhmastov.cdoitmo.adapter.array.TeacherPickerAdapter;
-import com.bukhmastov.cdoitmo.view.dialog.ColorPickerDialog;
 import com.bukhmastov.cdoitmo.factory.AppComponentProvider;
 import com.bukhmastov.cdoitmo.firebase.FirebaseAnalyticsProvider;
 import com.bukhmastov.cdoitmo.model.schedule.lessons.SLessons;
@@ -47,19 +51,15 @@ import com.bukhmastov.cdoitmo.util.Theme;
 import com.bukhmastov.cdoitmo.util.Thread;
 import com.bukhmastov.cdoitmo.util.singleton.CollectionUtils;
 import com.bukhmastov.cdoitmo.util.singleton.StringUtils;
+import com.bukhmastov.cdoitmo.view.dialog.ColorPickerDialog;
 import com.bukhmastov.cdoitmo.widget.ScheduleLessonsWidget;
 import com.bukhmastov.cdoitmo.widget.ScheduleLessonsWidgetStorage;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import java.util.ArrayList;
 import java.util.Locale;
 
 import javax.inject.Inject;
-
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 
 import static com.bukhmastov.cdoitmo.util.Thread.WSLC;
 
@@ -236,7 +236,7 @@ public class ScheduleLessonsWidgetConfigureActivityPresenterImpl implements Sche
     private void initPartDynamicShift() {
         log.v(TAG, "initPartDynamicShift");
         ViewGroup partDynamicShift = activity.findViewById(R.id.part_automatic_shift);
-        Switch partDynamicShiftSwitch = activity.findViewById(R.id.part_automatic_shift_switch);
+        SwitchMaterial partDynamicShiftSwitch = activity.findViewById(R.id.part_automatic_shift_switch);
         partDynamicShiftSwitch.setChecked(Default.useShiftAutomatic);
         partDynamicShiftSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             activatePartDynamicShift(isChecked);

@@ -2,15 +2,14 @@ package com.bukhmastov.cdoitmo.util.impl;
 
 import android.content.Context;
 import android.os.Build;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.bukhmastov.cdoitmo.App;
 import com.bukhmastov.cdoitmo.factory.AppComponentProvider;
-import com.bukhmastov.cdoitmo.firebase.FirebaseCrashlyticsProvider;
 import com.bukhmastov.cdoitmo.util.Log;
 import com.bukhmastov.cdoitmo.util.singleton.LogMetrics;
-import com.bukhmastov.cdoitmo.util.singleton.StringUtils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -22,10 +21,6 @@ import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
-
-import javax.inject.Inject;
-
-import dagger.Lazy;
 
 public class LogImpl implements Log {
 
@@ -63,9 +58,6 @@ public class LogImpl implements Log {
     private ArrayList<LogItem> logList = null;
     private boolean enabled = false;
 
-    @Inject
-    Lazy<FirebaseCrashlyticsProvider> firebaseCrashlyticsProvider;
-
     public LogImpl() {
         AppComponentProvider.getComponent().inject(this);
     }
@@ -81,7 +73,6 @@ public class LogImpl implements Log {
     @Override
     public int v(String TAG, Object... log) {
         String l = wrapLog(joinObjects(log));
-        firebaseCrashlyticsProvider.get().v(TAG, l);
         if (enabled) {
             addLog(new LogItem(VERBOSE, TAG, l));
             return android.util.Log.v(TAG, l);
@@ -93,7 +84,6 @@ public class LogImpl implements Log {
     @Override
     public int d(Object... log) {
         String l = wrapLog(joinObjects(log));
-        firebaseCrashlyticsProvider.get().d(TAGD, l);
         if (enabled) {
             addLog(new LogItem(DEBUG, TAGD, l));
             return android.util.Log.d(TAGD, l);
@@ -105,7 +95,6 @@ public class LogImpl implements Log {
     @Override
     public int i(String TAG, Object... log) {
         String l = wrapLog(joinObjects(log));
-        firebaseCrashlyticsProvider.get().i(TAG, l);
         if (enabled) {
             addLog(new LogItem(INFO, TAG, l));
             return android.util.Log.i(TAG, l);
@@ -118,7 +107,6 @@ public class LogImpl implements Log {
     public int w(String TAG, Object... log) {
         LogMetrics.warn++;
         String l = wrapLog(joinObjects(log));
-        firebaseCrashlyticsProvider.get().w(TAG, l);
         if (enabled) {
             addLog(new LogItem(WARN, TAG, l));
             return android.util.Log.w(TAG, l);
@@ -131,7 +119,6 @@ public class LogImpl implements Log {
     public int e(String TAG, Object... log) {
         LogMetrics.error++;
         String l = wrapLog(joinObjects(log));
-        firebaseCrashlyticsProvider.get().e(TAG, l);
         if (enabled) {
             addLog(new LogItem(ERROR, TAG, l));
             return android.util.Log.e(TAG, l);
@@ -144,7 +131,6 @@ public class LogImpl implements Log {
     public int wtf(String TAG, Object... log) {
         LogMetrics.wtf++;
         String l = wrapLog(joinObjects(log));
-        firebaseCrashlyticsProvider.get().wtf(TAG, l);
         if (enabled) {
             addLog(new LogItem(WTF, TAG, l));
             return android.util.Log.wtf(TAG, l);
@@ -156,7 +142,6 @@ public class LogImpl implements Log {
     @Override
     public int wtf(Throwable throwable) {
         LogMetrics.wtf++;
-        firebaseCrashlyticsProvider.get().wtf(throwable);
         if (enabled) {
             addLog(new LogItem(WTF_EXCEPTION, throwable));
             return android.util.Log.wtf("Assert", wrapLog(null), throwable);
@@ -179,10 +164,6 @@ public class LogImpl implements Log {
     public int exception(String msg, Throwable throwable) {
         LogMetrics.exception++;
         msg = msg == null ? "" : wrapLog(msg);
-        if (StringUtils.isNotEmpty(msg)) {
-            firebaseCrashlyticsProvider.get().w("Exception", msg);
-        }
-        firebaseCrashlyticsProvider.get().exception(throwable);
         if (enabled) {
             addLog(new LogItem(EXCEPTION, throwable));
             return android.util.Log.e("Exception", msg, throwable);

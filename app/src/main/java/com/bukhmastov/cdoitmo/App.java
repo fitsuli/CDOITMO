@@ -14,7 +14,6 @@ import com.bukhmastov.cdoitmo.event.events.OpenIntentEvent;
 import com.bukhmastov.cdoitmo.event.events.ShareTextEvent;
 import com.bukhmastov.cdoitmo.factory.AppComponentProvider;
 import com.bukhmastov.cdoitmo.firebase.FirebaseAnalyticsProvider;
-import com.bukhmastov.cdoitmo.firebase.FirebaseCrashlyticsProvider;
 import com.bukhmastov.cdoitmo.util.Log;
 import com.bukhmastov.cdoitmo.util.NotificationMessage;
 import com.bukhmastov.cdoitmo.util.Notifications;
@@ -56,8 +55,6 @@ public class App extends Application {
     NotificationMessage notificationMessage;
     @Inject
     FirebaseAnalyticsProvider firebaseAnalyticsProvider;
-    @Inject
-    FirebaseCrashlyticsProvider firebaseCrashlyticsProvider;
     @Inject
     Lazy<Notifications> notifications;
 
@@ -224,7 +221,6 @@ public class App extends Application {
     }
 
     private void setFirebase() {
-        firebaseCrashlyticsProvider.setEnabled(this);
         firebaseAnalyticsProvider.setEnabled(this);
     }
 

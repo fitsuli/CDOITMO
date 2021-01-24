@@ -5,11 +5,14 @@ import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import androidx.annotation.LayoutRes;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+
 import com.bukhmastov.cdoitmo.R;
 import com.bukhmastov.cdoitmo.activity.ConnectedActivity;
 import com.bukhmastov.cdoitmo.factory.AppComponentProvider;
 import com.bukhmastov.cdoitmo.firebase.FirebaseAnalyticsProvider;
-import com.bukhmastov.cdoitmo.firebase.FirebaseCrashlyticsProvider;
 import com.bukhmastov.cdoitmo.object.ProtocolTracker;
 import com.bukhmastov.cdoitmo.provider.InjectProvider;
 import com.bukhmastov.cdoitmo.util.Log;
@@ -25,9 +28,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import androidx.annotation.LayoutRes;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import dagger.Lazy;
 
 public abstract class Preference {
@@ -55,8 +55,6 @@ public abstract class Preference {
     Lazy<Static> staticUtil;
     @Inject
     Lazy<FirebaseAnalyticsProvider> firebaseAnalyticsProvider;
-    @Inject
-    Lazy<FirebaseCrashlyticsProvider> firebaseCrashlyticsProvider;
 
     public Preference(String key, Object defaultValue, @StringRes int title) {
         this(key, defaultValue, title, 0);
@@ -131,9 +129,6 @@ public abstract class Preference {
                 } else {
                     storage.get().clear(activity, Storage.CACHE, Storage.USER, "protocol#log");
                 }
-                break;
-            case "pref_allow_send_reports":
-                firebaseCrashlyticsProvider.get().setEnabled(activity, storagePref.get().get(activity, "pref_allow_send_reports", true));
                 break;
             case "pref_allow_collect_analytics":
                 firebaseAnalyticsProvider.get().setEnabled(activity, storagePref.get().get(activity, "pref_allow_collect_analytics", true), true);

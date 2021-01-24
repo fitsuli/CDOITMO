@@ -1,17 +1,18 @@
 package com.bukhmastov.cdoitmo.object.preference;
 
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Switch;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import com.bukhmastov.cdoitmo.R;
 import com.bukhmastov.cdoitmo.activity.ConnectedActivity;
 import com.bukhmastov.cdoitmo.factory.AppComponentProvider;
 import com.bukhmastov.cdoitmo.provider.InjectProvider;
 import com.bukhmastov.cdoitmo.util.Log;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -82,7 +83,7 @@ public class PreferenceSwitch extends Preference {
             return null;
         }
         ViewGroup preferenceSwitcher = preferenceLayout.findViewById(R.id.preference_switcher);
-        Switch preferenceSwitcherSwitch = preferenceLayout.findViewById(R.id.preference_switcher_switch);
+        SwitchMaterial preferenceSwitcherSwitch = preferenceLayout.findViewById(R.id.preference_switcher_switch);
         TextView preferenceSwitcherTitle = preferenceLayout.findViewById(R.id.preference_switcher_title);
          TextView preferenceSwitcherSummary = preferenceLayout.findViewById(R.id.preference_switcher_summary);
         preferenceSwitcherTitle.setText(preference.title);

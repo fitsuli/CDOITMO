@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.bukhmastov.cdoitmo.R;
@@ -18,6 +17,7 @@ import com.bukhmastov.cdoitmo.util.StoragePref;
 import com.bukhmastov.cdoitmo.util.Thread;
 import com.bukhmastov.cdoitmo.util.Time;
 import com.bukhmastov.cdoitmo.util.singleton.StringUtils;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import java.util.Arrays;
 import java.util.Calendar;
@@ -120,7 +120,7 @@ public class ThemeDialog extends Dialog {
             ViewGroup themeContainerStatic = themeLayout.findViewById(R.id.theme_container_static);
             ViewGroup themeContainerAuto = themeLayout.findViewById(R.id.theme_container_auto);
             ViewGroup switcherContainer = themeLayout.findViewById(R.id.switcher_container);
-            Switch switcher = themeLayout.findViewById(R.id.switcher);
+            SwitchMaterial switcher = themeLayout.findViewById(R.id.switcher);
             TextView t1Time = themeLayout.findViewById(R.id.t1_time);
             TextView t2Time = themeLayout.findViewById(R.id.t2_time);
             TextView t1Spinner = themeLayout.findViewById(R.id.t1_spinner);

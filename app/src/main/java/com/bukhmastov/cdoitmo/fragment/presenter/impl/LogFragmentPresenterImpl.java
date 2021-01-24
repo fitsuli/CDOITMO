@@ -6,15 +6,16 @@ import android.net.Uri;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
-import android.widget.Switch;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
 
 import com.bukhmastov.cdoitmo.R;
 import com.bukhmastov.cdoitmo.event.bus.EventBus;
 import com.bukhmastov.cdoitmo.event.events.OpenIntentEvent;
 import com.bukhmastov.cdoitmo.exception.SimulatedRuntimeException;
 import com.bukhmastov.cdoitmo.factory.AppComponentProvider;
-import com.bukhmastov.cdoitmo.firebase.FirebaseCrashlyticsProvider;
 import com.bukhmastov.cdoitmo.fragment.presenter.LogFragmentPresenter;
 import com.bukhmastov.cdoitmo.util.Log;
 import com.bukhmastov.cdoitmo.util.NotificationMessage;
@@ -24,14 +25,13 @@ import com.bukhmastov.cdoitmo.util.Thread;
 import com.bukhmastov.cdoitmo.util.Time;
 import com.bukhmastov.cdoitmo.util.singleton.FileUtils;
 import com.bukhmastov.cdoitmo.util.singleton.LogMetrics;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 
 import javax.inject.Inject;
 
-import androidx.annotation.Nullable;
-import androidx.core.content.FileProvider;
 import dagger.Lazy;
 
 public class LogFragmentPresenterImpl extends ConnectedFragmentPresenterImpl
@@ -49,8 +49,6 @@ public class LogFragmentPresenterImpl extends ConnectedFragmentPresenterImpl
     StoragePref storagePref;
     @Inject
     NotificationMessage notificationMessage;
-    @Inject
-    FirebaseCrashlyticsProvider firebaseCrashlyticsProvider;
     @Inject
     Lazy<Static> staticUtil;
     @Inject
@@ -117,7 +115,7 @@ public class LogFragmentPresenterImpl extends ConnectedFragmentPresenterImpl
             ((TextView) fragment.container().findViewById(R.id.wtf)).setText(String.valueOf(LogMetrics.wtf));
             // init firebase logs enabler
             ViewGroup firebaseLogs = activity.findViewById(R.id.firebase_logs);
-            Switch firebaseLogsSwitch = activity.findViewById(R.id.firebase_logs_switch);
+            SwitchMaterial firebaseLogsSwitch = activity.findViewById(R.id.firebase_logs_switch);
             firebaseLogs.setOnClickListener(v -> thread.runOnUI(() -> {
                 try {
                     firebaseLogsSwitch.setChecked(!storagePref.get(activity, "pref_allow_send_reports", true));
@@ -136,7 +134,7 @@ public class LogFragmentPresenterImpl extends ConnectedFragmentPresenterImpl
             });
             // init generic logs enabler
             ViewGroup genericLogs = activity.findViewById(R.id.generic_logs);
-            Switch genericLogsSwitch = activity.findViewById(R.id.generic_logs_switch);
+            SwitchMaterial genericLogsSwitch = activity.findViewById(R.id.generic_logs_switch);
             genericLogs.setOnClickListener(v -> thread.runOnUI(() -> {
                 try {
                     genericLogsSwitch.setChecked(!storagePref.get(activity, "pref_allow_collect_logs", false));
@@ -162,7 +160,6 @@ public class LogFragmentPresenterImpl extends ConnectedFragmentPresenterImpl
     }
 
     private void firebaseToggled(final boolean allowed) {
-        thread.standalone(() -> firebaseCrashlyticsProvider.setEnabled(activity, allowed));
     }
 
     private void genericToggled(final boolean allowed) {

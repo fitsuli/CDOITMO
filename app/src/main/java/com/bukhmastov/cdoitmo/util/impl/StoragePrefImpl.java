@@ -4,13 +4,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.preference.PreferenceManager;
+
 import androidx.annotation.NonNull;
 
 import com.bukhmastov.cdoitmo.App;
 import com.bukhmastov.cdoitmo.activity.ConnectedActivity;
 import com.bukhmastov.cdoitmo.factory.AppComponentProvider;
 import com.bukhmastov.cdoitmo.firebase.FirebaseAnalyticsProvider;
-import com.bukhmastov.cdoitmo.firebase.FirebaseCrashlyticsProvider;
 import com.bukhmastov.cdoitmo.fragment.settings.SettingsCacheFragment;
 import com.bukhmastov.cdoitmo.fragment.settings.SettingsERegisterFragment;
 import com.bukhmastov.cdoitmo.fragment.settings.SettingsGeneralFragment;
@@ -45,8 +45,6 @@ public class StoragePrefImpl implements StoragePref {
     Lazy<Log> log;
     @Inject
     Lazy<FirebaseAnalyticsProvider> firebaseAnalyticsProvider;
-    @Inject
-    Lazy<FirebaseCrashlyticsProvider> firebaseCrashlyticsProvider;
 
     public StoragePrefImpl() {
         AppComponentProvider.getComponent().inject(this);
@@ -178,7 +176,6 @@ public class StoragePrefImpl implements StoragePref {
             put(context, "pref_allow_send_reports", false);
             put(context, "pref_allow_collect_logs", true);
             firebaseAnalyticsProvider.get().setEnabled(context, false);
-            firebaseCrashlyticsProvider.get().setEnabled(context, false);
             log.get().i(TAG, "Currently running with debug mode, preferences has been reset to debug mode");
         }
     }
